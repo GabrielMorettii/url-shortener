@@ -12,6 +12,7 @@
   },
   "rules": {
     "prettier/prettier": "error",
-    "@typescript-eslint/strict-boolean-expressions": "off"
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/no-floating-promises": "off"
   }
 }

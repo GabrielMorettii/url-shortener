@@ -1,14 +1,12 @@
 import express, { type Express } from "express";
 import setupMiddlewares from "@/main/config/middlewares";
+import setupRoutes from "@/main/config/routes";
 
 export const setupApp = (): Express => {
   const app = express();
 
   setupMiddlewares(app);
-
-  app.get("/", (req, res) => {
-    res.send("Hello, World!");
-  });
+  setupRoutes(app);
 
   return app;
 };
