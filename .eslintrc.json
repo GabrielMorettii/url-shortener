@@ -4,7 +4,13 @@
     "node": true
   },
   "extends": [
-    "eslint:recommended",
+    "standard-with-typescript",
     "plugin:prettier/recommended"
-  ]
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "prettier/prettier": "error"
+  }
 }

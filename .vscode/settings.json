@@ -1,0 +1,13 @@
+{
+  "editor.rulers": [
+    {
+      "column": 120,
+      "color": "#ffaa0080"
+    },
+    {
+      "column": 150,
+      "color": "#ff000080"
+    },
+  ],
+  "editor.tabSize": 2,
+}
