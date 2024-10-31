@@ -6,14 +6,17 @@
   "author": "Gabriel Moretti",
   "license": "ISC",
   "scripts": {
+    "dev": "tsnd -r tsconfig-paths/register --transpile-only --ignore-watch node_modules src/main/server.ts",
     "prepare": "husky install"
   },
   "dependencies": {
-    "@prisma/client": "^5.21.1"
+    "@prisma/client": "^5.21.1",
+    "express": "^4.21.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
+    "@types/express": "^5.0.0",
     "@types/node": "^22.8.4",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "eslint": "^8.57.1",
