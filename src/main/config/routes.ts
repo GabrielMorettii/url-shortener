@@ -1,10 +1,11 @@
 import { type Express, Router } from "express";
-import setupAuthRoutes from "../routes/auth-routes";
+import { shortUrlRouter, authRouter } from "../routes";
 
 export default (app: Express): void => {
   const router = Router();
 
-  app.use(router);
+  router.use("/auth", authRouter);
+  router.use("/short-url", shortUrlRouter);
 
-  setupAuthRoutes(router);
+  app.use(router);
 };
