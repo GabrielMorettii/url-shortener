@@ -9,7 +9,7 @@ datasource db {
 
 model User {
   id        String    @id(map: "pk_user_id") @default(uuid()) @db.Uuid
-  name      String    @unique @db.VarChar(255)
+  name      String    @db.VarChar(255)
   email     String    @unique @db.VarChar(255)
   password  String    @db.VarChar
   createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp(6)

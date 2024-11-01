@@ -4,7 +4,7 @@ export class UserModel {
   public email!: string;
   public password!: string;
   public readonly createdAt?: Date;
-  public readonly updatedAt?: Date;
+  public readonly updatedAt?: Date | null;
 
   constructor(props: UserModel) {
     Object.assign(this, props);
