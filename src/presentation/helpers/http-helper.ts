@@ -1,13 +1,19 @@
 import { type HttpResponse } from "@/presentation/protocols";
+import { InternalServerError } from "../errors";
 
 export const badRequest = (error: Error): HttpResponse => ({
   statusCode: 400,
   body: error,
 });
 
-export const forbidden = (error: Error): HttpResponse => ({
-  statusCode: 403,
+export const unauthorized = (error: Error): HttpResponse => ({
+  statusCode: 401,
   body: error,
+});
+
+export const serverError = (error: Error): HttpResponse => ({
+  statusCode: 500,
+  body: new InternalServerError(error.message),
 });
 
 export const ok = (data: any): HttpResponse => ({
