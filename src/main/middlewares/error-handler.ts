@@ -1,6 +1,7 @@
 import { type NextFunction, type Request, type Response } from "express";
 import { OperationalError } from "@/presentation/errors";
 import { StatusCode } from "@/presentation/helpers";
+import env from "../config/env";
 
 export function errorHandler(
   error: OperationalError,
@@ -11,9 +12,14 @@ export function errorHandler(
   const isOperationalError = error instanceof OperationalError;
 
   if (!isOperationalError) {
+    const isDevelopmentMode = env.enviroment === "development";
+    const message = isDevelopmentMode
+      ? (error as Error).message
+      : "Internal server error";
+
     return response.status(StatusCode.InternalServerError).json({
       status: StatusCode.InternalServerError,
-      message: "Internal server error",
+      message,
     });
   }
 

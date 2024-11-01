@@ -6,9 +6,7 @@ export class RequiredFieldValidation implements Validation {
 
   validate(input: any): Error | void {
     if (!input[this.fieldName]) {
-      return new BadRequestError(
-        `The following field is required: ${this.fieldName}`,
-      );
+      return new BadRequestError(`The ${this.fieldName} field is required.`);
     }
   }
 }
