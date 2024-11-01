@@ -3,7 +3,9 @@ import { AuthMiddleware } from "@/presentation/middlewares";
 import env from "@/main/config/env";
 import { JwtAdapter } from "@/infra/cryptography/jwt-adapter";
 
-export const makeAuthMiddleware = (): Middleware => {
+export const makeAuthMiddleware = (
+  tokenIsRequired: boolean = true,
+): Middleware => {
   const jwtAdapter = new JwtAdapter(env.jwtSecret);
-  return new AuthMiddleware(jwtAdapter);
+  return new AuthMiddleware(jwtAdapter, tokenIsRequired);
 };

@@ -12,10 +12,15 @@ export interface JwtPayload {
 }
 
 export class AuthMiddleware implements Middleware {
-  constructor(private readonly decrypter: Decrypter) {}
+  constructor(
+    private readonly decrypter: Decrypter,
+    private readonly tokenIsRequired: boolean = true,
+  ) {}
 
   handle(request: AuthMiddlewareRequest): HttpResponse {
-    const defaultResponse = unauthorized(new UnauthorizedError());
+    const defaultResponse = this.tokenIsRequired
+      ? unauthorized(new UnauthorizedError())
+      : ok({});
 
     try {
       const { accessToken: bearerToken } = request;
