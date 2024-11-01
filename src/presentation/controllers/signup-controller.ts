@@ -1,5 +1,5 @@
 import {
-  // type Validation,
+  type Validation,
   type Controller,
   type HttpResponse,
 } from "@/presentation/protocols";
@@ -14,12 +14,12 @@ export interface SignUpRequest {
 
 export class SignUpController implements Controller {
   constructor(
-    // private readonly validation: Validation,
+    private readonly validation: Validation,
     private readonly addUser: AddUser,
   ) {}
 
   async handle(request: SignUpRequest): Promise<HttpResponse> {
-    // this.validation.validate(request);
+    this.validation.validate(request);
 
     const { name, email, password } = request;
 
