@@ -17,14 +17,14 @@ export class DbCreateShortUrl implements CreateShortUrl {
   }: CreateShortUrlRequest): Promise<CreateShortUrlResponse> {
     const sixRamdomCharacters = this.generateRandomString();
 
-    const shortUrl = `${env.baseUrl}/${sixRamdomCharacters}`;
-
     await this.createShortUrlRepository.create({
       originalUrl: url,
-      shortUrl,
+      shortUrl: sixRamdomCharacters,
       clicks: 0,
       userId,
     });
+
+    const shortUrl = `${env.baseUrl}/${sixRamdomCharacters}`;
 
     return { shortUrl };
   }

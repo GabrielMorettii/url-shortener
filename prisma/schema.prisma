@@ -23,7 +23,7 @@ model User {
 model ShortUrl {
   id          String    @id(map: "pk_short_url_id") @default(uuid()) @db.Uuid
   originalUrl String    @db.VarChar(255)
-  shortUrl    String    @db.VarChar(255)
+  shortUrl    String    @unique @db.VarChar(255)
   clicks      Int       @db.Integer
   userId      String?   @db.Uuid
   createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamp(6)

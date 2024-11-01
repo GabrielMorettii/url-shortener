@@ -4,8 +4,8 @@ import { shortUrlRouter, authRouter } from "../routes";
 export default (app: Express): void => {
   const router = Router();
 
+  router.use(shortUrlRouter);
   router.use("/auth", authRouter);
-  router.use("/short-url", shortUrlRouter);
 
   app.use(router);
 };
