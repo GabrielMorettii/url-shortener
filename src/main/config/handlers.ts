@@ -24,4 +24,16 @@ export default (app: Express): void => {
       errorHandler(err, request, response, next);
     },
   );
+
+  process.on("unhandledRejection", (error) => {
+    console.error("unhandledRejection:", error);
+  });
+
+  process.on("uncaughtException", (error, origin) => {
+    console.error(`${origin}:`, error);
+  });
+
+  process.on("exit", (code) => {
+    console.info(`Successfully exited with code ${code}.`);
+  });
 };
