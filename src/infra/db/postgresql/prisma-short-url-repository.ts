@@ -9,6 +9,7 @@ import { type ShortUrlModel } from "@/domain/models";
 import {
   type UpdateShortUrlRequest,
   type GetShortUrlRequest,
+  type GetAllUserShortUrlRequest,
 } from "@/domain/usecases";
 
 export class PrismaShortUrlRepository
@@ -35,6 +36,18 @@ export class PrismaShortUrlRepository
     });
 
     return shortUrl as ShortUrlModel;
+  }
+
+  async getAllByUser(
+    data: GetAllUserShortUrlRequest,
+  ): Promise<ShortUrlModel[]> {
+    const shortUrls = await this.prisma.shortUrl.findMany({
+      where: {
+        userId: data.userId,
+      },
+    });
+
+    return shortUrls as ShortUrlModel[];
   }
 
   async update({ id, ...rest }: UpdateShortUrlRequest): Promise<void> {

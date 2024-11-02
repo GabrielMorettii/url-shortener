@@ -1,9 +1,9 @@
-import { GetShortUrlController } from "@/presentation/controllers";
+import { GetAllUserShortUrlController } from "@/presentation/controllers";
 import { type Controller } from "@/presentation/protocols";
-import { makeGetShortUrl } from "../usecases";
+import { makeGetAllUserShortUrl } from "../usecases";
 
 export const makeGetAllUserShortUrlController = (): Controller => {
-  const controller = new GetShortUrlController(makeGetShortUrl());
+  const controller = new GetAllUserShortUrlController(makeGetAllUserShortUrl());
 
   return controller;
 };

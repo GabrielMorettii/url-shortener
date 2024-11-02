@@ -2,6 +2,7 @@ import { Router } from "express";
 import { adaptRoute } from "../adapters";
 import {
   makeCreateShortUrlController,
+  makeGetAllUserShortUrlController,
   makeGetShortUrlController,
 } from "../factories";
 import { checkAuthOptional, checkAuthRequired } from "../middlewares";
@@ -19,5 +20,5 @@ shortUrlRouter.post(
 shortUrlRouter.get(
   "/short-url/user/:userId",
   checkAuthRequired,
-  adaptRoute(makeCreateShortUrlController()),
+  adaptRoute(makeGetAllUserShortUrlController()),
 );
