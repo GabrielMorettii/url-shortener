@@ -61,9 +61,31 @@ This interactive documentation allows you to explore the available endpoints, th
     npm run dev
     ```
 
+## Postman Collection
+
+A Postman collection is available in the root of the project to facilitate testing the API endpoints. You can import this collection into Postman and create a new environment with the following variable:
+
+- `BASE_URL=http://localhost:3030`
+
+This environment variable ensures the requests are directed to the correct base URL for local testing.
+
+## Design Patterns
+
+This project applies a range of design patterns to build a flexible, modular, and maintainable architecture. Each pattern has been selected to address specific challenges and ensure that the code remains scalable and adaptable to future changes.
+
+* Factory
+* Adapter
+* Composite
+* Proxy
+* Dependency Injection
+* Abstract Server
+* Composition Root
+* Builder
+* Singleton
+
 ##
 
 <div align="center">
   <a href="https://www.linkedin.com/in/gabriel-morettii/"><img alt="Made by" src="https://img.shields.io/badge/made%20by-Gabriel%20Moretti-%49c31b"></a>
-  <a href="https://opensource.org/licenses/MIT"><img alt="License MIT" src="https://img.shields.io/badge/license-MIT-brightgreen"></a>
+
 </div>
