@@ -4,19 +4,22 @@ import {
   type CreateShortUrlParams,
   type CreateShortUrlRepository,
   type UpdateShortUrlRepository,
+  type DeleteShortUrlRepository,
 } from "@/data/protocols/db";
 import { type ShortUrlModel } from "@/domain/models";
 import {
   type UpdateShortUrlRequest,
   type GetShortUrlRequest,
   type GetAllUserShortUrlRequest,
+  type DeleteShortUrlRequest,
 } from "@/domain/usecases";
 
 export class PrismaShortUrlRepository
   implements
     CreateShortUrlRepository,
     GetShortUrlRepository,
-    UpdateShortUrlRepository
+    UpdateShortUrlRepository,
+    DeleteShortUrlRepository
 {
   constructor(private readonly prisma: PrismaClient) {}
 
@@ -32,6 +35,7 @@ export class PrismaShortUrlRepository
     const shortUrl = await this.prisma.shortUrl.findUnique({
       where: {
         shortUrl: data.shortUrl,
+        deletedAt: null,
       },
     });
 
@@ -44,6 +48,7 @@ export class PrismaShortUrlRepository
     const shortUrls = await this.prisma.shortUrl.findMany({
       where: {
         userId: data.userId,
+        deletedAt: null,
       },
     });
 
@@ -54,6 +59,13 @@ export class PrismaShortUrlRepository
     await this.prisma.shortUrl.update({
       where: { id },
       data: rest,
+    });
+  }
+
+  async delete({ shortUrl, userId }: DeleteShortUrlRequest): Promise<void> {
+    await this.prisma.shortUrl.update({
+      where: { userId, shortUrl },
+      data: { deletedAt: new Date() },
     });
   }
 }
