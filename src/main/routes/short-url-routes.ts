@@ -18,7 +18,7 @@ shortUrlRouter.post(
 );
 
 shortUrlRouter.get(
-  "/short-url/user/:userId",
+  "/short-url/user",
   checkAuthRequired,
   adaptRoute(makeGetAllUserShortUrlController()),
 );
