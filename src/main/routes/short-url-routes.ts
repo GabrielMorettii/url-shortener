@@ -5,6 +5,7 @@ import {
   makeDeleteShortUrlController,
   makeGetAllUserShortUrlController,
   makeGetShortUrlController,
+  makeUpdateShortUrlController,
 } from "../factories";
 import { checkAuthOptional, checkAuthRequired } from "../middlewares";
 
@@ -18,14 +19,13 @@ shortUrlRouter.post(
   adaptRoute(makeCreateShortUrlController()),
 );
 
-shortUrlRouter.use(checkAuthRequired);
-
-shortUrlRouter.delete(
-  "/short-url/:shortUrl",
-  adaptRoute(makeDeleteShortUrlController()),
-);
+shortUrlRouter
+  .route("/short-url/:shortUrl")
+  .put(checkAuthRequired, adaptRoute(makeUpdateShortUrlController()))
+  .delete(checkAuthRequired, adaptRoute(makeDeleteShortUrlController()));
 
 shortUrlRouter.get(
   "/short-url/user",
+  checkAuthRequired,
   adaptRoute(makeGetAllUserShortUrlController()),
 );

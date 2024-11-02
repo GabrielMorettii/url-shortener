@@ -55,11 +55,16 @@ export class PrismaShortUrlRepository
     return shortUrls as ShortUrlModel[];
   }
 
-  async update({ id, ...rest }: UpdateShortUrlRequest): Promise<void> {
-    await this.prisma.shortUrl.update({
-      where: { id },
+  async update({
+    shortUrl,
+    ...rest
+  }: UpdateShortUrlRequest): Promise<ShortUrlModel> {
+    const shortUrlModel = await this.prisma.shortUrl.update({
+      where: { shortUrl },
       data: rest,
     });
+
+    return shortUrlModel as ShortUrlModel;
   }
 
   async delete({ shortUrl, userId }: DeleteShortUrlRequest): Promise<void> {

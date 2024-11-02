@@ -5,5 +5,5 @@ import { prisma, PrismaShortUrlRepository } from "@/infra/db";
 export const makeUpdateShortUrl = (): UpdateShortUrl => {
   const shortUrlRepository = new PrismaShortUrlRepository(prisma);
 
-  return new DbUpdateShortUrl(shortUrlRepository);
+  return new DbUpdateShortUrl(shortUrlRepository, shortUrlRepository);
 };

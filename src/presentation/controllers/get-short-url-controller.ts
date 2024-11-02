@@ -19,7 +19,7 @@ export class GetShortUrlController implements Controller {
     const data = await this.getShortUrl.handle(request);
 
     await this.updateShortUrl.handle({
-      id: data.id!,
+      shortUrl: data.shortUrl,
       clicks: data.clicks + 1,
     });
 

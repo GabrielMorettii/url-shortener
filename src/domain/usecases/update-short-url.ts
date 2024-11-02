@@ -1,8 +1,12 @@
+import { type ShortUrlModel } from "../models";
+
 export interface UpdateShortUrl {
-  handle(request: UpdateShortUrlRequest): Promise<void>;
+  handle(request: UpdateShortUrlRequest): Promise<ShortUrlModel>;
 }
 
 export interface UpdateShortUrlRequest {
-  id: string;
-  clicks: number;
+  shortUrl: string;
+  userId?: string;
+  originalUrl?: string;
+  clicks?: number;
 }
