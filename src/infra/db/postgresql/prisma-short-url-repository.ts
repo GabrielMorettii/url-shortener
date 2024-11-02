@@ -3,12 +3,19 @@ import {
   type GetShortUrlRepository,
   type CreateShortUrlParams,
   type CreateShortUrlRepository,
+  type UpdateShortUrlRepository,
 } from "@/data/protocols/db";
 import { type ShortUrlModel } from "@/domain/models";
-import { type GetShortUrlRequest } from "@/domain/usecases";
+import {
+  type UpdateShortUrlRequest,
+  type GetShortUrlRequest,
+} from "@/domain/usecases";
 
 export class PrismaShortUrlRepository
-  implements CreateShortUrlRepository, GetShortUrlRepository
+  implements
+    CreateShortUrlRepository,
+    GetShortUrlRepository,
+    UpdateShortUrlRepository
 {
   constructor(private readonly prisma: PrismaClient) {}
 
@@ -28,5 +35,12 @@ export class PrismaShortUrlRepository
     });
 
     return shortUrl as ShortUrlModel;
+  }
+
+  async update({ id, ...rest }: UpdateShortUrlRequest): Promise<void> {
+    await this.prisma.shortUrl.update({
+      where: { id },
+      data: rest,
+    });
   }
 }

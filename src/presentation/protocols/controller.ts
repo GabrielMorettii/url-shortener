@@ -1,5 +1,5 @@
 import { type HttpResponse } from "@/presentation/protocols";
 
-export interface Controller<T = any> {
-  handle: (request: T) => Promise<HttpResponse>;
+export interface Controller<T = any, R = any> {
+  handle: (request: T, response: R) => Promise<HttpResponse | void>;
 }

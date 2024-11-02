@@ -1,13 +1,28 @@
+import { type Response } from "express";
 import { type Controller, type HttpResponse } from "@/presentation/protocols";
-import { type GetShortUrlRequest, type GetShortUrl } from "@/domain/usecases";
-import { ok } from "../helpers";
+import {
+  type GetShortUrlRequest,
+  type GetShortUrl,
+  type UpdateShortUrl,
+} from "@/domain/usecases";
 
 export class GetShortUrlController implements Controller {
-  constructor(private readonly getShortUrl: GetShortUrl) {}
+  constructor(
+    private readonly getShortUrl: GetShortUrl,
+    private readonly updateShortUrl: UpdateShortUrl,
+  ) {}
 
-  async handle(request: GetShortUrlRequest): Promise<HttpResponse> {
+  async handle(
+    request: GetShortUrlRequest,
+    response: Response,
+  ): Promise<HttpResponse | void> {
     const data = await this.getShortUrl.handle(request);
 
-    return ok(data);
+    await this.updateShortUrl.handle({
+      id: data.id!,
+      clicks: data.clicks + 1,
+    });
+
+    response.redirect(data.originalUrl);
   }
 }
