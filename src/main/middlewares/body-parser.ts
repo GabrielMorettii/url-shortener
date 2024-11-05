@@ -1,3 +1,7 @@
 import { json } from "express";
 
-export const bodyParser = json();
+const bodyPayloadLimit = "10kb";
+
+export const bodyParser = json({
+  limit: bodyPayloadLimit,
+});
