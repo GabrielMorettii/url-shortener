@@ -5,3 +5,5 @@ export * from "./error-handler";
 export * from "./auth";
 export * from "./no-cache";
 export * from "./rate-limiter";
+export * from "./header-sanitizer";
+export * from "./hpp-handler";
