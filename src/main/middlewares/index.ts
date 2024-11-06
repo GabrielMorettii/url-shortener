@@ -7,3 +7,4 @@ export * from "./no-cache";
 export * from "./rate-limiter";
 export * from "./header-sanitizer";
 export * from "./hpp-handler";
+export * from "./xss-handler";
