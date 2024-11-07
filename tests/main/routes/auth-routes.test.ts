@@ -22,7 +22,7 @@ describe("Auth Routes", () => {
 
   describe("POST /signup", () => {
     it("Should return 201 on signup", async () => {
-      await request(app)
+      const response = await request(app)
         .post("/auth/signup")
         .send({
           name: "dev",
@@ -30,6 +30,12 @@ describe("Auth Routes", () => {
           password: "123",
         })
         .expect(201);
+
+      const user = await prisma.user.findUnique({
+        where: { email: "dev@gmail.com" },
+      });
+
+      expect(response.body.id).toEqual(user?.id);
     });
   });
 
@@ -48,13 +54,15 @@ describe("Auth Routes", () => {
         },
       });
 
-      await request(app)
+      const response = await request(app)
         .post("/auth/login")
         .send({
           email: "dev@gmail.com",
           password: userPassword,
         })
         .expect(200);
+
+      expect(response.body.token).not.toBeNull();
     });
   });
 });

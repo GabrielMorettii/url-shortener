@@ -10,7 +10,7 @@
     "dev": "npx tsnd -r tsconfig-paths/register --transpile-only --ignore-watch node_modules src/main/server.ts",
     "migrate:deploy": "npx prisma migrate deploy",
     "migrate:test": "npx dotenv -e .env.test -- npm run migrate:deploy",
-    "test": "npx dotenv -e .env.test -- jest",
+    "test": "npx dotenv -e .env.test -- jest --runInBand",
     "up:test": "docker-compose --env-file .env.test up -d test_db"
   },
   "dependencies": {
