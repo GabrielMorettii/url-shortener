@@ -3,7 +3,7 @@ import { type Express } from "express";
 
 import { prisma } from "@/infra/db";
 import { setupApp } from "@/main/config/app";
-import { mockAccessToken } from "./mocks";
+import { mockAccessToken, mockShortUrl } from "./mocks";
 
 describe("ShortUrl Routes", () => {
   let app: Express;
@@ -43,6 +43,14 @@ describe("ShortUrl Routes", () => {
           url: "https://www.google.com",
         })
         .expect(201);
+    });
+  });
+
+  describe("GET /:shortUrl", () => {
+    it("Should return 302 on get short url(redirected)", async () => {
+      const shortUrlModel = await mockShortUrl();
+
+      await request(app).get(`/${shortUrlModel.shortUrl}`).expect(302);
     });
   });
 });
