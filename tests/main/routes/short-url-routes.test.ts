@@ -53,4 +53,15 @@ describe("ShortUrl Routes", () => {
       await request(app).get(`/${shortUrlModel.shortUrl}`).expect(302);
     });
   });
+
+  describe("GET /short-url/user", () => {
+    it("Should return 200 on get user short urls", async () => {
+      const accessToken = await mockAccessToken();
+
+      await request(app)
+        .get("/short-url/user")
+        .set("Authorization", `Bearer ${accessToken}`)
+        .expect(200);
+    });
+  });
 });

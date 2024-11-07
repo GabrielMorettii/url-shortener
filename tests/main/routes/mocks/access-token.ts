@@ -1,21 +1,12 @@
 import { JwtAdapter } from "@/infra/cryptography/jwt-adapter";
-import { prisma } from "@/infra/db";
-
 import env from "@/main/config/env";
+import { mockUser } from "./user";
 
 export const mockAccessToken = async (userId?: string): Promise<string> => {
   let mockUserId = userId;
 
   if (!mockUserId) {
-    mockUserId = (
-      await prisma.user.create({
-        data: {
-          name: "anyuser",
-          email: "anyuser@gmail.com",
-          password: "any",
-        },
-      })
-    ).id;
+    mockUserId = (await mockUser()).id!;
   }
 
   const jwt = new JwtAdapter(env.jwtSecret);
