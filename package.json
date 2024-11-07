@@ -11,6 +11,8 @@
     "migrate:deploy": "npx prisma migrate deploy",
     "migrate:test": "npx dotenv -e .env.test -- npm run migrate:deploy",
     "test": "npx dotenv -e .env.test -- jest --runInBand",
+    "test:unit": "npm test -- --watch -c tests/config/jest-unit-config.ts",
+    "test:integration": "npm test -- --watch -c tests/config/jest-integration-config.ts",
     "up:test": "docker-compose --env-file .env.test up -d test_db"
   },
   "dependencies": {

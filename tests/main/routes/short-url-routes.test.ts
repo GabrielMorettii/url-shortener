@@ -13,10 +13,6 @@ describe("ShortUrl Routes", () => {
     app = setupApp();
   });
 
-  afterAll(async () => {
-    await prisma.$disconnect();
-  });
-
   afterEach(async () => {
     await prisma.$transaction([
       prisma.shortUrl.deleteMany({}),

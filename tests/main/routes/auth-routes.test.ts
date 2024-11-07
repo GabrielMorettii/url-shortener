@@ -12,10 +12,6 @@ describe("Auth Routes", () => {
     app = setupApp();
   });
 
-  afterAll(async () => {
-    await prisma.$disconnect();
-  });
-
   afterEach(async () => {
     await prisma.user.deleteMany({});
   });
