@@ -4,6 +4,7 @@ import { type Express } from "express";
 import { prisma } from "@/infra/db";
 import { setupApp } from "@/main/config/app";
 import { mockAccessToken, mockShortUrl, mockUser } from "./mocks";
+import { faker } from "@faker-js/faker/.";
 
 describe("ShortUrl Routes", () => {
   let app: Express;
@@ -75,6 +76,44 @@ describe("ShortUrl Routes", () => {
         .expect(302);
 
       expect(response.header.location).toBe(shortUrlModel?.originalUrl);
+    });
+  });
+
+  describe("PUT /short-url/:shortUrl", () => {
+    it("Should return 200 on update short url", async () => {
+      const mockUserModel = await mockUser();
+      const [shortUrlModel, accessToken] = await Promise.all([
+        mockShortUrl(mockUserModel.id),
+        mockAccessToken(mockUserModel.id),
+      ]);
+
+      const newUrl = faker.internet.url();
+
+      const response = await request(app)
+        .put(`/short-url/${shortUrlModel.shortUrl}`)
+        .set("Authorization", `Bearer ${accessToken}`)
+        .send({
+          originalUrl: newUrl,
+        })
+        .expect(200);
+
+      expect(response.body.id).toBe(shortUrlModel.id);
+      expect(response.body.originalUrl).toBe(newUrl);
+    });
+  });
+
+  describe("DELETE /short-url/:shortUrl", () => {
+    it("Should return 204 on delete short url", async () => {
+      const mockUserModel = await mockUser();
+      const [shortUrlModel, accessToken] = await Promise.all([
+        mockShortUrl(mockUserModel.id),
+        mockAccessToken(mockUserModel.id),
+      ]);
+
+      await request(app)
+        .delete(`/short-url/${shortUrlModel.shortUrl}`)
+        .set("Authorization", `Bearer ${accessToken}`)
+        .expect(204);
     });
   });
 
