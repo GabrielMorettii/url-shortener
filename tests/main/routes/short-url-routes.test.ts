@@ -3,7 +3,11 @@ import { type Express } from "express";
 
 import { prisma } from "@/infra/db";
 import { setupApp } from "@/main/config/app";
-import { mockAccessToken, mockShortUrl, mockUser } from "./mocks";
+import {
+  mockAccessToken,
+  mockShortUrl,
+  mockUser,
+} from "../../mocks/integration";
 import { faker } from "@faker-js/faker/.";
 
 describe("ShortUrl Routes", () => {
