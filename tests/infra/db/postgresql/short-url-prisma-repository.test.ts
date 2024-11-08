@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { prisma, PrismaShortUrlRepository } from "@/infra/db";
-import { mockShortUrl, mockUser } from "@/tests/mocks/integration";
+import { mockShortUrl, mockUser } from "@/tests/main/routes/mocks";
 
 const makeSut = (): PrismaShortUrlRepository => {
   return new PrismaShortUrlRepository(prisma);

@@ -1,14 +1,10 @@
 import request from "supertest";
 import { type Express } from "express";
+import { faker } from "@faker-js/faker";
 
 import { prisma } from "@/infra/db";
 import { setupApp } from "@/main/config/app";
-import {
-  mockAccessToken,
-  mockShortUrl,
-  mockUser,
-} from "../../mocks/integration";
-import { faker } from "@faker-js/faker/.";
+import { mockAccessToken, mockShortUrl, mockUser } from "./mocks";
 
 describe("ShortUrl Routes", () => {
   let app: Express;
