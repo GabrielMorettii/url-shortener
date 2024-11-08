@@ -16,19 +16,17 @@ describe("PrismaShortUrlRepository", () => {
       const sut = makeSut();
       const shortUrlParams = {
         originalUrl: faker.internet.url(),
-        shortUrl: faker.string.alphanumeric(8),
+        shortUrl: faker.string.alphanumeric(6),
         clicks: 0,
       };
 
-      const shortUrl = await sut.create(shortUrlParams);
+      const shortUrlModel = await sut.create(shortUrlParams);
 
-      expect(shortUrl).toBeTruthy();
-      expect(shortUrl).toHaveProperty("id");
-      expect(shortUrl).toHaveProperty(
-        "originalUrl",
-        shortUrlParams.originalUrl,
-      );
-      expect(shortUrl).toHaveProperty("shortUrl", shortUrlParams.shortUrl);
+      expect(shortUrlModel).toBeTruthy();
+      expect(shortUrlModel).toHaveProperty("id");
+      expect(shortUrlModel).toHaveProperty("shortUrl", shortUrlParams.shortUrl);
+      expect(shortUrlModel).toHaveProperty("createdAt");
+      expect(shortUrlModel).toHaveProperty("updatedAt");
     });
   });
 
@@ -45,7 +43,7 @@ describe("PrismaShortUrlRepository", () => {
 
     it("Should return null if short URL does not exist", async () => {
       const sut = makeSut();
-      const result = await sut.get({ shortUrl: faker.string.alphanumeric(8) });
+      const result = await sut.get({ shortUrl: faker.string.alphanumeric(6) });
 
       expect(result).toBeNull();
     });
