@@ -16,8 +16,8 @@ This interactive documentation allows you to explore the available endpoints, th
 
 1. **Clone the repository**:
     ```bash
-    git clone git@github.com:GabrielMorettii/teddy-url-shortener.git
-    cd teddy-url-shortener
+    git clone git@github.com:GabrielMorettii/url-shortener.git
+    cd url-shortener
     ```
 
 2. **Set up the `.env` file**:
@@ -34,8 +34,8 @@ This interactive documentation allows you to explore the available endpoints, th
 
 1. **Clone the repository**:
     ```bash
-    git clone git@github.com:GabrielMorettii/teddy-url-shortener.git
-    cd teddy-url-shortener
+    git clone git@github.com:GabrielMorettii/url-shortener.git
+    cd url-shortener
     ```
 
 2. **Install dependencies**:
